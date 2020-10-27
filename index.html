@@ -4,14 +4,198 @@
       <title>Example</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
+      <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap" rel="stylesheet">
+
       <!-- Do not add `link` tags-->
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
       <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+
+       <!--- This style block was added here to prevent the flickering of hidden content when the page loads-->
+     <div id="loadOverlay" style="background-color:#ffffff; position:absolute; top:0px; left:0px; width:100%; height:100%; z-index:2000;"></div>
+     
     </head>
     <body>
-      <h1>Browser Template</h1>
+      
+      <!-- BEGIN REGISTER FORM SECTION -->
+      <section id="register-section">      
+        <form name="register-form" id="register-form">          
+          <div class="container">
+
+            <div class="row mb-4">
+              <div class="col-12">Register User</div>
+            </div>
+
+            
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="person-add-sharp"></ion-icon></span>
+              </div>
+              <input type="text" class="form-control" placeholder="first name" name="credentials[firstName]" id="register-firstName" required>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="person-add-sharp"></ion-icon></span>
+              </div>
+              <input type="text" class="form-control" placeholder="last name" name="credentials[lastName]" id="register-lastName" required>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="mail"></ion-icon></span>
+              </div>
+              <input type="email" class="form-control" placeholder="email address" name="credentials[email]" id="register-email" required>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="lock-closed-sharp"></ion-icon></span>
+              </div>
+              <input type="password" class="form-control" placeholder="password" name="credentials[password]" id="register-password" required>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="lock-closed-sharp"></ion-icon></span>
+              </div>
+              <input type="password" class="form-control" placeholder="confirm password" name="credentials[password_confirmation]" id="register-confirmation" required>
+            </div>
+
+            <div class="row">
+              <div class="login col-12"><p id="registration-result"></p></div>
+            </div>
+
+            <div class="row">
+              <div class="login col-12"><input class="btn btn-secondary btn-block" type="submit" name="register-submit" value="Register a new user"></div>
+            </div>
+
+            <div class="row">
+              <div class="login col-12"></div>
+            </div>
+
+            <div class="row">
+              <div class="login col-12"></div>
+            </div>
+
+
+            <div class="row">
+              <div class="accent-div-bottom login col-12"><a href="#" id="anchor-login">Already a user?  Click here to login</a></div>
+            </div>
+
+
+          </div>
+        </form> 
+      </section>
+      <!-- END REGISTER FORM SECTION --> 
+       
+      
+
+      <!-- BEGIN LOGIN FORM SECTION -->
+      <section id="login-secion">
+        <form name="login-form" id="login-form">
+        
+            <div class="container">
+
+              <div class="row mb-4">
+                <div class="col-12">User login</div>
+              </div>
+              
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="mail"></ion-icon></span>
+                </div>
+                <input type="email" class="form-control" placeholder="email address" name="credentials[email]" id="login-email" required>
+              </div>
+
+              
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+                </div>
+                <input type="password" class="form-control" placeholder="password" name="credentials[password]" id="login-password" required>
+              </div>
+
+              <div class="row">
+                <div class="col-12"><p id="login-result"></p></div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <input class="btn btn-secondary btn-block" type="submit" name="login-submit" value="Sign In"></input>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12">
+                  <a href="#" id="anchor-forgot-pw"><!-- Forgot username -or- password? --></a></span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
+              </div>
+
+          </div>
+
+        </form>
+      </section>
+      <!-- END LOGIN FORM SECTION -->
+
+      
+      <!-- START CHANGE PASSWORD SECTION-->
+      <section id="change-password-section">
+        <form name="change-password-form" id="change-password-form">        
+          <div class="container">
+
+            <div class="row mb-4">
+              <div class="col-12">Change password</div>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+              </div>
+              <input type="password" class="form-control" placeholder="current password" name="passwords[old]" id="change-password" required>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+              </div>
+              <input type="password" class="form-control" placeholder="new password" name="passwords[new]" id="change-confirmation" required>
+            </div>
+
+            <div class="row">
+              <div class="col-12"><p id="change-password-result"></p></div>
+            </div>
+
+            <div class="row">
+              <div class="col-12"><input class="btn btn-secondary btn-block" type="submit" name="change-password" value="change password"></div>
+            </div>
+
+            <div class="row">
+              <div class="col-12"></div>
+            </div>
+
+            <div class="row">
+              <div class="col-12"><a href="#" id="anchor-back-to-game">Click to return to the game</a></div>
+            </div>
+
+          </div>
+        </form>
+      </section>
+      <!-- END CHANGE PASSWORD SECTION -->
+        
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
     </body>
 </html>

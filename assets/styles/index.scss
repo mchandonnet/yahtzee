@@ -1,1 +1,19 @@
 @import '~bootstrap/scss/bootstrap';
+$default-theme: #00af66;
+$hover-transparency: .25;
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #ededed;
+}
+
+
+#loadOverlay {
+  display: none;
+}
+
+.container {
+  margin: 100px auto;
+  padding: 25px;
+  max-width: 40vw;
+}
