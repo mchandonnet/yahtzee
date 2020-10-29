@@ -3,7 +3,6 @@
 let activeGame = true
 let roundNumber = 1 // tracks turns - a game of yahtzee has 13 turns
 let rollCount = 0 // tracks rolls per turn - max of 3
-// let allDice = [] // includes all the dice
 let tableDice = [] // only the dice that are being rolled
 let savedDice = [] // only the dice that are being held
 
@@ -20,9 +19,6 @@ const nextRound = function () {
     // clear the saved dice
     $('#saved-game-table').empty()
     savedDice.length = 0
-
-    // clear the allDice Array
-    // allDice.length = 0
 
     // increment the round number and reset the roll count
     roundNumber++
@@ -70,11 +66,6 @@ const addToHold = function (event) {
       showDie(i, tableDice[i], 'roll')
     }
 
-    // build new allDice Array
-    // allDice.length = 0
-    // allDice = tableDice.concat(savedDice)
-    // allDice.sort()
-
     console.log('roll: ', tableDice)
     console.log('save: ', savedDice)
     // console.log('all: ', allDice)
@@ -101,14 +92,8 @@ const addToTable = function (event) {
       showDie(i, savedDice[i], 'save')
     }
 
-    // build new allDice Array
-    // allDice.length = 0
-    // allDice = tableDice.concat(savedDice)
-    // allDice.sort()
-
     console.log('roll: ', tableDice)
     console.log('hold: ', savedDice)
-    // console.log('all: ', allDice)
   }
 }
 
@@ -119,14 +104,11 @@ const rollDie = function () {
     rollCount += 1 // increment the roll counter
     $('#game-table').empty() // clear the table for the next roll
     tableDice.length = 0 // reset the array for tracking rolled dice
-    // allDice.length = 0
-    // allDice.push.apply(allDice, savedDice)
 
     const diceToRoll = (5 - savedDice.length)
     for (let i = 0; i < diceToRoll; i++) {
       const die = randDie()
       tableDice.push(die)
-      // allDice.push(die)
       showDie(i, die, 'roll')
     }
   }
@@ -137,7 +119,6 @@ module.exports = {
   addToHold: addToHold,
   addToTable: addToTable,
   nextRound: nextRound,
-  // allDice: allDice,
   tableDice: tableDice,
   savedDice: savedDice
 }
