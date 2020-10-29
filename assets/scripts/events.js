@@ -39,7 +39,7 @@ const onChangePW = function (event) {
   const form = event.target
   // use getFormFields() to get the data from the form
   const data = getFormFields(form)
-  api.apiCall('/change-password', 'PATCH', data, false)
+  api.apiCall('/change-password', 'PATCH', data, true)
   // handle SUCCESSFUL response
     .then(ui.onChangeSuccess)
   // handle ERROR response

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Yahtzee!</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
@@ -193,6 +193,141 @@
         </form>
       </section>
       <!-- END CHANGE PASSWORD SECTION -->
+
+
+      <!-- START GAME SECTION-->
+      <section id="game-section-dice">
+        <div id="game-section">
+          <div class="container game-container">
+
+            <div class="row mb-4">
+              <div class="col-12 d-flex justify-content-center" id="game-table">
+                
+                <!-- 
+                <input type="image" class="mx-4 die-border" src="./assets/images/dice-1.png" width="70px" height="70px" alt="Dice" id="d0" />
+                <img class="mx-4 die-border" src="./assets/images/dice-2.png" width="70px" height="70px" alt="Dice" id="d1">
+                <img class="mx-4 die-border" src="./assets/images/dice-3.png" width="70px" height="70px" alt="Dice" id="d2">
+                <img class="mx-4 die-border" src="./assets/images/dice-4.png" width="70px" height="70px" alt="Dice" id="d3">
+                <img class="mx-4 die-border" src="./assets/images/dice-5.png" width="70px" height="70px" alt="Dice" id="d4">
+                -->
+
+              </div>
+
+              <div class="col-12 d-flex justify-content-center">
+                <div class="col-8 d-flex justify-content-center mt-5 mb-5">
+                  <button class="btn btn-success btn-block" id="roll-dice" name="roll-dice">Roll Dice</button>
+                </div>                
+              </div>
+
+              <div class="col-12 d-flex justify-content-center" id="saved-game-table">
+                <!-- Placeholder for saved Dice -->
+              </div>
+
+              <div class="col-12 d-flex justify-content-end align-content-end">
+                <a href="#" id="start-new-game">start new game...</a>
+              </div>
+                
+                
+
+              </div>
+            </div>
+
+
+            <div class="container scoreSheet">
+              <table>
+                <thead>  
+                  <tr>
+                    <th class="section-heading">Upper section</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                  
+                  <tr>
+                    <td>Ones</td>
+                    <td><a href="#" id="ones">+</a></td>                    
+                  </tr>
+                  
+                  <tr>
+                    <td>Twos</td>
+                    <td><a href="#" id="twos">+</a></td>                    
+                  </tr>
+                  
+                  <tr>
+                    <td>Threes</td>
+                    <td><a href="#" id="threes">+</a></td>                    
+                  </tr>
+                  
+                  <tr>
+                    <td>Fours</td>
+                    <td><a href="#" id="fours">+</a></td>   
+                  </tr>
+                  
+                  <tr>
+                    <td>Fives</td>
+                    <td><a href="#" id="fives">+</a></td>   
+                  </tr>
+                  
+                  <tr>
+                    <td>Sixes</td>
+                    <td><a href="#" id="sixes">+</a></td>   
+                  </tr>
+                  
+                  <tr id="upper-bonus">
+                    <td>Bonus</td>
+                    <td id="upper-bonus-score"></td>
+                  </tr>
+                  
+                  <tr>
+                    <th class="section-heading">Lower section</th>
+                    <th>Score</th>
+                  </tr>
+                  
+                  <tr>
+                    <td>3 of a kind</td>
+                    <td id="3k-score"></td>                    
+                  </tr>
+                  
+                  <tr>
+                    <td>4 of a kind</td>
+                    <td id="4k-score"></td>                    
+                  </tr>
+                  
+                  <tr>
+                    <td>Full House</td>
+                    <td id="fh-score"></td>                    
+                  </tr>
+                  
+                  <tr>
+                    <td>Small Straight</td>
+                    <td id="ss-score"></td>                    
+                  </tr>
+                  
+                  <tr>
+                    <td>Large Straight</td>
+                    <td id="ls-score"></td>                    
+                  </tr>
+                  
+                  <tr>
+                    <td>Yahtzee</td>
+                    <td id="yahtzee-score"></td>                    
+                  </tr>
+                  
+                  <tr>
+                    <td>Chance</td>
+                    <td id="chance-score"></td>                    
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          
+
+
+          </div>
+        </div>
+      </section>
+      <!-- END GAME SECTION -->
         
 
 

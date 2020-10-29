@@ -7,13 +7,43 @@ body {
   background-color: #ededed;
 }
 
+#register-form { 
+  display: none
+}
+
+#change-password-form {
+  display: none
+}
+
+// #game-section {
+//   display: none
+// }
+
+.container {
+  margin: 100px auto;
+  padding: 25px;
+  max-width: 600px;
+}
+
+.scoresheet-container {
+  padding: 25px;
+  max-width: 600px;
+}
+
 
 #loadOverlay {
   display: none;
 }
 
-.container {
-  margin: 100px auto;
-  padding: 25px;
-  max-width: 40vw;
+.die-border {
+  border: 2px solid black;
+
+  &.hold {
+    border: 2px solid red;
+  }
 }
+
+.game-container {
+  border: 1px solid black;
+}
+
