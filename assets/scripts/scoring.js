@@ -94,6 +94,36 @@ const fh = function () {
   console.log(score)
 }
 
+const ss = function () {
+  const all = allDice()
+  const unique = getUnique()
+  let score = 0
+
+  // if there are 5 unique items in the allDice Array && they are numbered 1-5 or 2-6
+  if ((unique.length >= 4) && (((all.includes(1)) && (all.includes(2)) && (all.includes(3)) && (all.includes(4))) || ((all.includes(2)) && (all.includes(3)) && (all.includes(4)) && (all.includes(5))) || ((all.includes(3)) && (all.includes(4)) && (all.includes(5)) && (all.includes(6))))) {
+    score = 30
+  } else {
+    score = 0
+  }
+  console.log(score)
+}
+
+const ls = function () {
+  const unique = getUnique()
+  const total = (allDice().reduce(reducer))
+  let score = 0
+
+  console.log('unique: ', unique.length)
+  console.log('total: ', total)
+  // if there are 5 unique items in the allDice Array && they are numbered 1-5 or 2-6
+  if ((unique.length === 5) && ((total === 15) || (total === 20))) {
+    score = 40
+  } else {
+    score = 0
+  }
+  console.log(score)
+}
+
 // scoring logic for yahtzee
 const yahtzee = function () {
   if ((allDice().length > 0) && (getUnique().length === 1)) {
@@ -118,6 +148,8 @@ module.exports = {
   threeK: threeK,
   fourK: fourK,
   fh: fh,
+  ss: ss,
+  ls: ls,
   yahtzee: yahtzee,
   chance: chance
 }

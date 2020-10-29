@@ -61,6 +61,8 @@ $(() => {
   $('#3k').on('click', scoring.threeK)
   $('#4k').on('click', scoring.fourK)
   $('#fh').on('click', scoring.fh)
+  $('#ss').on('click', scoring.ss)
+  $('#ls').on('click', scoring.ls)
   $('#yahtzee').on('click', scoring.yahtzee)
   $('#chance').on('click', scoring.chance)
 
