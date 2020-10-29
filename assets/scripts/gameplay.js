@@ -75,8 +75,8 @@ const addToHold = function (event) {
     // allDice = tableDice.concat(savedDice)
     // allDice.sort()
 
-    console.log('hold: ', tableDice)
-    console.log('roll: ', savedDice)
+    console.log('roll: ', tableDice)
+    console.log('save: ', savedDice)
     // console.log('all: ', allDice)
   }
 }

@@ -58,6 +58,12 @@ $(() => {
     scoring.count(6)
   })
 
+  $('#3k').on('click', scoring.threeK)
+  $('#4k').on('click', scoring.fourK)
+  $('#fh').on('click', scoring.fh)
+  $('#yahtzee').on('click', scoring.yahtzee)
+  $('#chance').on('click', scoring.chance)
+
   // temp for newRound
   $('#start-new-game').on('click', gamePlay.nextRound)
 })
