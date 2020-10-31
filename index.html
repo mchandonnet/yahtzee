@@ -4,8 +4,10 @@
       <title>Yahtzee!</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap" rel="stylesheet">
+
+      <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;700&display=swap" rel="stylesheet">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
       <!-- Do not add `link` tags-->
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
@@ -19,6 +21,43 @@
      
     </head>
     <body>
+
+      <!-- Being Navigation section -->
+      <nav id="navigation">
+        <div class="row nav">
+          <div class="col-6 logo d-flex justify-content-center align-items-center"><em>Yahtzee!</em></div>
+          <div class="col-6" id="nav-images">
+            <ul> 
+
+              <li>
+                <a href="#" id="btn-home">
+                  <img src="./assets/images/home.svg" width="40px" height="40px" class="svg-images">
+                </a>
+              </li>
+
+              <li>
+                <a href="#" id="btn-leaders">
+                  <img src="./assets/images/leaderboard.svg" width="40px" height="40px" class="svg-image-trophy">
+                </a>
+              </li>
+
+              <li>
+                <a href="#" id="btn-change-password">
+                  <img src="./assets/images/change-pw.svg" width="40px" height="40px" class="svg-images">
+                </a>
+              </li>
+
+              <li>
+                <a href="#" id="btn-logout">
+                  <img src="./assets/images/logout-outline.svg" width="40px" height="40px" class="svg-images">
+                </a>
+              </li>
+
+            </ul>
+          </div>
+          <div class="col-12" id="api-failure"></div>
+        </div>
+      </nav>
       
       <!-- BEGIN REGISTER FORM SECTION -->
       <section id="register-section">      
@@ -66,7 +105,9 @@
             </div>
 
             <div class="row">
-              <div class="login col-12"><p id="registration-result"></p></div>
+              <div class="col-12">
+                <div id="registration-result"></div>
+              </div>
             </div>
 
             <div class="row">
@@ -83,7 +124,7 @@
 
 
             <div class="row">
-              <div class="accent-div-bottom login col-12"><a href="#" id="anchor-login">Already a user?  Click here to login</a></div>
+              <div class="accent-div-bottom login col-12 d-flex justify-content-end"><a href="#" id="anchor-login">Already a user?  Click here to login</a></div>
             </div>
 
 
@@ -120,7 +161,9 @@
               </div>
 
               <div class="row">
-                <div class="col-12"><p id="login-result"></p></div>
+                <div class="col-12">
+                  <div id="login-result"></div>
+                </div>
               </div>
 
               <div class="row">
@@ -131,7 +174,7 @@
 
               <div class="row">
                 <div class="login col-12">
-                  <a href="#" id="anchor-forgot-pw"><!-- Forgot username -or- password? --></a></span>
+                  <a href="#" id="anchor-forgot-pw"></a></span>
                 </div>
               </div>
 
@@ -140,7 +183,7 @@
               </div>
 
               <div class="row">
-                <div class="login col-12"><a href="#" id="anchor-register-user">Click to register new user</a></div>
+                <div class="login col-12 d-flex justify-content-end"><a href="#" id="anchor-register-user">Click to register new user</a></div>
               </div>
 
           </div>
@@ -174,7 +217,15 @@
             </div>
 
             <div class="row">
-              <div class="col-12"><p id="change-password-result"></p></div>
+              <div class="col-12" id="change-password-result">
+                <p id="change-password-result"></p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div id="login-result"></div>
+              </div>
             </div>
 
             <div class="row">
@@ -186,7 +237,7 @@
             </div>
 
             <div class="row">
-              <div class="col-12"><a href="#" id="anchor-back-to-game">Click to return to the game</a></div>
+              <div class="col-12 d-flex justify-content-end"><a href="#" id="anchor-back-to-game">Click to return to the game</a></div>
             </div>
 
           </div>
@@ -198,139 +249,205 @@
       <!-- START GAME SECTION-->
       <section id="game-section-dice">
         <div id="game-section">
-          <div class="container game-container">
+          <div class="alt-container game-container">
 
             <div class="row mb-4">
-              <div class="col-12 d-flex justify-content-center" id="game-table">
+              
+              <div class="col-12 d-flex justify-content-center die-spacer" id="game-table">
+                
+                <a href="#" data-toggle="popover" title="No active game..." data-animation="true" data-placement="top" data-trigger="focus" data-content="Start a new game by clicking the link in the lower right corner...">
+                  <img class="mx-4 die-border" src="./assets/images/dice-1.png" width="60px" height="60px" alt="Dice" id="d1">
+                </a>
+
+                <a href="#" data-toggle="popover" title="No active game..." data-animation="true" data-placement="top" data-trigger="focus" data-content="Start a new game by clicking the link in the lower right corner...">
+                  <img class="mx-4 die-border" src="./assets/images/dice-2.png" width="60px" height="60px" alt="Dice" id="d1">
+                </a>
+
+                <a href="#" data-toggle="popover" title="No active game..." data-animation="true" data-placement="top" data-trigger="focus" data-content="Start a new game by clicking the link in the lower right corner...">
+                  <img class="mx-4 die-border" src="./assets/images/dice-3.png" width="60px" height="60px" alt="Dice" id="d1">
+                </a>
+
+                <a href="#" data-toggle="popover" title="No active game..." data-animation="true" data-placement="top" data-trigger="focus" data-content="Start a new game by clicking the link in the lower right corner...">
+                  <img class="mx-4 die-border" src="./assets/images/dice-4.png" width="60px" height="60px" alt="Dice" id="d1">
+                </a>
+
+                <a href="#" data-toggle="popover" title="No active game..." data-animation="true" data-placement="top" data-trigger="focus" data-content="Start a new game by clicking the link in the lower right corner...">
+                  <img class="mx-4 die-border" src="./assets/images/dice-5.png" width="60px" height="60px" alt="Dice" id="d1">
+                </a>
                 
                 <!-- 
-                <input type="image" class="mx-4 die-border" src="./assets/images/dice-1.png" width="70px" height="70px" alt="Dice" id="d0" />
-                <img class="mx-4 die-border" src="./assets/images/dice-2.png" width="70px" height="70px" alt="Dice" id="d1">
-                <img class="mx-4 die-border" src="./assets/images/dice-3.png" width="70px" height="70px" alt="Dice" id="d2">
-                <img class="mx-4 die-border" src="./assets/images/dice-4.png" width="70px" height="70px" alt="Dice" id="d3">
-                <img class="mx-4 die-border" src="./assets/images/dice-5.png" width="70px" height="70px" alt="Dice" id="d4">
-                -->
+                  <img class="mx-4 die-border" src="./assets/images/dice-2.png" width="60px" height="60px" alt="Dice" id="d1">
+                <img class="mx-4 die-border" src="./assets/images/dice-3.png" width="60px" height="60px" alt="Dice" id="d2">
+                <img class="mx-4 die-border" src="./assets/images/dice-4.png" width="60px" height="60px" alt="Dice" id="d3">
+                <img class="mx-4 die-border" src="./assets/images/dice-5.png" width="60px" height="60px" alt="Dice" id="d4"> 
+              -->
+                
 
               </div>
 
               <div class="col-12 d-flex justify-content-center">
-                <div class="col-8 d-flex justify-content-center mt-5 mb-5">
-                  <button class="btn btn-success btn-block" id="roll-dice" name="roll-dice">Roll Dice</button>
+                <div class="col-11 d-flex justify-content-center mt-5 mb-5" id="roll-button-div">
+                  <button class="btn btn-colors btn-block" id="roll-dice" name="roll-dice" disabled>Start a new game by clicking the link in the lower right corner...</button>
                 </div>                
               </div>
 
-              <div class="col-12 d-flex justify-content-center" id="saved-game-table">
+              <div class="col-12 d-flex justify-content-center die-spacer" id="saved-game-table">
                 <!-- Placeholder for saved Dice -->
               </div>
 
+              </div>
               <div class="col-12 d-flex justify-content-end align-content-end">
                 <a href="#" id="start-new-game">start new game...</a>
               </div>
-                
-                
-
-              </div>
             </div>
 
 
-            <div class="container scoreSheet">
-              <table>
-                <thead>  
-                  <tr>
-                    <th class="section-heading">Upper section</th>
-                    <th>Score</th>
-                  </tr>
-                </thead>
-                
-                <tbody>
-                  
-                  <tr>
-                    <td>Ones</td>
-                    <td><a href="#" id="ones">+</a></td>                    
-                  </tr>
-                  
-                  <tr>
-                    <td>Twos</td>
-                    <td><a href="#" id="twos">+</a></td>                    
-                  </tr>
-                  
-                  <tr>
-                    <td>Threes</td>
-                    <td><a href="#" id="threes">+</a></td>                    
-                  </tr>
-                  
-                  <tr>
-                    <td>Fours</td>
-                    <td><a href="#" id="fours">+</a></td>   
-                  </tr>
-                  
-                  <tr>
-                    <td>Fives</td>
-                    <td><a href="#" id="fives">+</a></td>   
-                  </tr>
-                  
-                  <tr>
-                    <td>Sixes</td>
-                    <td><a href="#" id="sixes">+</a></td>   
-                  </tr>
-                  
-                  <tr id="upper-bonus">
-                    <td>Bonus</td>
-                    <td id="upper-bonus-score"></td>
-                  </tr>
-                  
-                  <tr>
-                    <th class="section-heading">Lower section</th>
-                    <th>Score</th>
-                  </tr>
-                  
-                  <tr>
-                    <td>3 of a kind</td>
-                    <td><a href="#" id="3k">+</a></td>                    
-                  </tr>
-                  
-                  <tr>
-                    <td>4 of a kind</td>
-                    <td><a href="#" id="4k">+</a></td>                    
-                  </tr>
-                  
-                  <tr>
-                    <td>Full House</td>
-                    <td><a href="#" id="fh">+</a></td>                    
-                  </tr>
-                  
-                  <tr>
-                    <td>Small Straight</td>
-                    <td><a href="#" id="ss">+</a></td>                    
-                  </tr>
-                  
-                  <tr>
-                    <td>Large Straight</td>
-                    <td><a href="#" id="ls">+</a></td>                    
-                  </tr>
-                  
-                  <tr>
-                    <td>Yahtzee</td>
-                    <td><a href="#" id="yahtzee">+</a></td>                    
-                  </tr>
-                  
-                  <tr>
-                    <td>Chance</td>
-                    <td><a href="#" id="chance">+</a></td>                    
-                  </tr>
-                </tbody>
-              </table>
+            <div class="alt-container scoreSheet">
+              
+              
+              <div class="row col-12 header scores border-top border-dark">
+                <div class="col-12 d-flex justify-content-start ">Upper section</div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Aces - Count and Add Only Aces</div>
+                <div class="col-6 d-flex justify-content-end" id="ones-div">
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Twos - Count and Add Only Twos</div>
+                <div class="col-6 d-flex justify-content-end" id="twos-div">
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Threes - Count and Add Only Threes</div>
+                <div class="col-6 d-flex justify-content-end" id="threes-div">
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Fours - Count and Add Only Fours</div>
+                <div class="col-6 d-flex justify-content-end" id="fours-div">
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Fives - Count and Add Only Fives</div>
+                <div class="col-6 d-flex justify-content-end" id="fives-div">
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Sixes - Count and Add Only Sixes</div>
+                <div class="col-6 d-flex justify-content-end" id="sixes-div">
+                </div>
+              </div>
+
+              
+
+              <div class="row col-12 scores">
+                <div class="col-11 d-flex justify-content-end">SUBTOTAL:</div>
+                <div class="col-1 d-flex justify-content-end" id="sub-top"></div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-11 d-flex justify-content-end">BONUS - If subtotal is 63 or over:</div>
+                <div class="col-1 d-flex justify-content-end" id="bonus"></div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-11 d-flex justify-content-end">TOTAL - Upper Section Total:</div>
+                <div class="col-1 d-flex justify-content-end" id="top-total"></div>
+              </div>
+
+
+              <div class="row col-12 scores header">
+                <div class="col-12 d-flex justify-content-start">Lower section</div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">3 of a Kind - Total of all Dice</div>
+                <div class="col-6 d-flex justify-content-end" id="three_k-div">
+                </div>
+              </div>
+
+
+              <div class="row col-12 scores">
+                <div class="col-6">4 of a Kind - Total of all Dice</div>
+                <div class="col-6 d-flex justify-content-end" id="four_k-div">
+                  <!-- <a href="#" id="4k">Apply score to 4 of a Kind</a> -->
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Full House - Score 25</div>
+                <div class="col-6 d-flex justify-content-end" id="full_house-div">
+                  <!-- <a href="#" id="fh">Apply score to Full House</a> -->
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Sm Straight - Score 30</div>
+                <div class="col-6 d-flex justify-content-end" id="small_straight-div">
+                  <!-- <a href="#" id="ss">Apply score to Sm Straight</a> -->
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Lg Straight - Score 40</div>
+                <div class="col-6 d-flex justify-content-end" id="large_straight-div">
+                  <!-- <a href="#" id="ls">Apply score to Lg Straight</a> -->
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Yahtzee - Score 50</div>
+                <div class="col-6 d-flex justify-content-end" id="yahtzee-div">
+                  <!-- <a href="#" id="yahtzee">Apply score to Yahtzee</a> -->
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-6">Chance - Total of all Dice</div>
+                <div class="col-6 d-flex justify-content-end" id="chance-div">
+                  <!-- <a href="#" id="chance">Apply score to Chance</a> -->
+                </div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-11 d-flex justify-content-end">LOWER TOTAL:</div>
+                <div class="col-1 d-flex justify-content-end" id="lower-div"></div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-11 d-flex justify-content-end">UPPER TOTAL:</div>
+                <div class="col-1 d-flex justify-content-end" id="upper-div"></div>
+              </div>
+
+              <div class="row col-12 scores">
+                <div class="col-11 d-flex justify-content-end">GRAND TOTAL:</div>
+                <div class="col-1 d-flex justify-content-end" id="grand-div"></div>
+              </div>
+
+
             </div>
           
-
-
           </div>
         </div>
       </section>
       <!-- END GAME SECTION -->
         
 
-
+    <script>
+      $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();
+      $('.popover-dismiss').popover({
+        trigger: 'focus'
+      })  
+      });
+    </script>
     <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
     </body>
 </html>

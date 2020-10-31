@@ -1,6 +1,8 @@
 'use strict'
 
-const { unique } = require('jquery')
+const api = require('./api')
+const ui = require('./ui')
+
 const gameplay = require('./gameplay')
 
 const allDice = function () {
@@ -32,11 +34,12 @@ const count = function (num) {
   // combine all the dice into a since array and sort it...
   // const allDice = gameplay.tableDice.concat(gameplay.savedDice)
   // allDice.sort()
-  console.log('All Dice: ', allDice())
-  console.log('Table Dice: ', gameplay.tableDice)
-  console.log('Saved Dice: ', gameplay.savedDice)
+  // console.log('All Dice: ', allDice())
+  // console.log('Table Dice: ', gameplay.tableDice)
+  // console.log('Saved Dice: ', gameplay.savedDice)
   const count = allDice().filter(el => el === num)
   console.log(num * count.length)
+  return (num * count.length)
 }
 
 // scoring logic for 3K
@@ -55,6 +58,7 @@ const threeK = function () {
     }
   }
   console.log(score)
+  return score
 }
 
 // scoring logic for 4K
@@ -73,6 +77,7 @@ const fourK = function () {
     }
   }
   console.log(score)
+  return score
 }
 
 const fh = function () {
@@ -83,8 +88,8 @@ const fh = function () {
   if (unique.length === 2) {
     const a = getQty(all, unique[0])
     const b = getQty(all, unique[1])
-    console.log('a: ', a)
-    console.log('b: ', b)
+    // console.log('a: ', a)
+    // console.log('b: ', b)
     if (((a === 3) && (b === 2)) || ((a === 2) && (b === 3))) {
       score = 25
     }
@@ -92,6 +97,7 @@ const fh = function () {
     score = 0
   }
   console.log(score)
+  return score
 }
 
 const ss = function () {
@@ -106,6 +112,7 @@ const ss = function () {
     score = 0
   }
   console.log(score)
+  return score
 }
 
 const ls = function () {
@@ -113,8 +120,6 @@ const ls = function () {
   const total = (allDice().reduce(reducer))
   let score = 0
 
-  console.log('unique: ', unique.length)
-  console.log('total: ', total)
   // if there are 5 unique items in the allDice Array && they are numbered 1-5 or 2-6
   if ((unique.length === 5) && ((total === 15) || (total === 20))) {
     score = 40
@@ -122,25 +127,31 @@ const ls = function () {
     score = 0
   }
   console.log(score)
+  return score
 }
 
 // scoring logic for yahtzee
 const yahtzee = function () {
+  let score = 0
   if ((allDice().length > 0) && (getUnique().length === 1)) {
-    console.log(50)
+    score = 50
   } else {
-    console.log(0)
+    score = 0
   }
+  console.log(score)
+  return score
 }
 
 // scoring logic for "chance"
 const chance = function () {
+  let score = 0
   if (allDice().length > 0) {
-    const count = allDice().reduce(reducer)
-    console.log(count)
+    score = allDice().reduce(reducer)
   } else {
-    return false
+    score = 0
   }
+  console.log(score)
+  return score
 }
 
 module.exports = {

@@ -17,6 +17,7 @@ $(() => {
 
   // Create event listeners for links
   // ---------------------------------------------------------------------- //
+  // views(changepw, login, register, nav, game)
   // Register User / Already a user
   $('#anchor-login').on('click', function () {
     ui.views(false, true, false, false, false)
@@ -24,6 +25,18 @@ $(() => {
 
   $('#anchor-register-user').on('click', function () {
     ui.views(false, false, true, false, false)
+  })
+
+  $('#anchor-back-to-game').on('click', function () {
+    ui.views(false, false, false, true, true)
+  })
+
+  $('#btn-change-password').on('click', function () {
+    ui.views(true, false, false, true, false)
+  })
+
+  $('#btn-home').on('click', function () {
+    ui.views(false, false, false, true, true)
   })
 
   // Create event listeners for Game PLay
@@ -34,38 +47,53 @@ $(() => {
   $('#saved-game-table').on('click', '#rolled-die', gamePlay.addToTable)
 
   // add score
-  $('#ones').on('click', function () {
-    scoring.count(1)
+  $('#ones-div').on('click', '#ones', function () {
+    events.onScoreTop(1)
   })
 
-  $('#twos').on('click', function () {
-    scoring.count(2)
+  $('#twos-div').on('click', '#twos', function () {
+    events.onScoreTop(2)
   })
 
-  $('#threes').on('click', function () {
-    scoring.count(3)
+  $('#threes-div').on('click', '#threes', function () {
+    events.onScoreTop(3)
   })
 
-  $('#fours').on('click', function () {
-    scoring.count(4)
+  $('#fours-div').on('click', '#fours', function () {
+    events.onScoreTop(4)
   })
 
-  $('#fives').on('click', function () {
-    scoring.count(5)
+  $('#fives-div').on('click', '#fives', function () {
+    events.onScoreTop(5)
   })
 
-  $('#sixes').on('click', function () {
-    scoring.count(6)
+  $('#sixes-div').on('click', '#sixes', function () {
+    events.onScoreTop(6)
   })
 
-  $('#3k').on('click', scoring.threeK)
-  $('#4k').on('click', scoring.fourK)
-  $('#fh').on('click', scoring.fh)
-  $('#ss').on('click', scoring.ss)
-  $('#ls').on('click', scoring.ls)
-  $('#yahtzee').on('click', scoring.yahtzee)
-  $('#chance').on('click', scoring.chance)
+  $('#three_k-div').on('click', '#3k', function () {
+    events.onScoreBottom('3k')
+  })
 
-  // temp for newRound
-  $('#start-new-game').on('click', gamePlay.nextRound)
+  $('#four_k-div').on('click', '#4k', function () {
+    events.onScoreBottom('4k')
+  })
+  $('#full_house-div').on('click', '#fh', function () {
+    events.onScoreBottom('fh')
+  })
+  $('#small_straight-div').on('click', '#ss', function () {
+    events.onScoreBottom('ss')
+  })
+  $('#large_straight-div').on('click', '#ls', function () {
+    events.onScoreBottom('ls')
+  })
+  $('#yahtzee-div').on('click', '#yahtzee', function () {
+    events.onScoreBottom('yahtzee')
+  })
+  $('#chance-div').on('click', '#chance', function () {
+    events.onScoreBottom('chance')
+  })
+
+  // link for creating a new game
+  $('#start-new-game').on('click', events.onNewGame)
 })
