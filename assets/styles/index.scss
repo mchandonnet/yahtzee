@@ -1,1 +1,172 @@
 @import '~bootstrap/scss/bootstrap';
+$default-theme: #00af66;
+$hover-transparency: .25;
+
+body {
+  font-family: 'Signika', sans-serif;
+  background-color: #ededed;
+  font-size: 15px;
+}
+
+*:focus {
+  outline: none;
+}
+
+// main link color
+a:link,
+a:visited {
+  color: #DE2B1B;
+}
+
+a:active,
+a:hover {
+  color: #e8483c;
+}
+
+// over ride bootstrap form colors
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="color"]:focus {   
+  border-color:#DE2B1B;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(232, 72, 60, .5);
+  outline: 0 none;
+}
+
+.header {
+  background-color: #f1978f;
+  font-weight: bold;
+}
+
+.die-spacer {
+  height: 60px;
+  color: #DE2B1B;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#register-form { 
+  display: none
+}
+
+#change-password-form {
+  display: none
+}
+
+#game-section {
+  display: none
+}
+
+#high-scores {
+  display: none;
+}
+
+
+#nav-images {
+  display: none;
+}
+
+.nav {
+  
+  background-color: #000000;
+  height: 80px;
+  right: 10px;
+  text-align: right;
+
+  & li {
+    display: inline-block;
+    margin: 10px 30px 0 0;
+    list-style: none;
+    text-transform: lowercase;
+  
+    & a:link,
+    & a:visited {
+        padding-bottom: 1px;
+        font-size: 20px;
+        line-height: 60px;
+    }
+
+    }
+
+  }
+
+  .btn-colors {
+    border-radius: 10px;
+    background-color: #DE2B1B;
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  .btn-colors:hover {
+    border-radius: 10px;
+    background-color: #e8483c;
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  .logo {
+    color: #DE2B1B;
+    font-size: 60px;
+    font-weight: 700;
+    text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+  }
+
+.svg-images {
+  filter: invert(98%) sepia(11%) saturate(321%) hue-rotate(252deg) brightness(117%) contrast(100%);
+}
+
+.svg-images:hover {
+  filter: invert(26%) sepia(69%) saturate(2130%) hue-rotate(348deg) brightness(98%) contrast(99%);
+}
+
+
+.svg-image-trophy {
+  filter: invert(98%) sepia(11%) saturate(321%) hue-rotate(252deg) brightness(117%) contrast(100%);
+}
+.svg-image-trophy:hover {
+  filter: invert(83%) sepia(69%) saturate(892%) hue-rotate(331deg) brightness(91%) contrast(81%);
+}
+
+.container {
+  margin: 100px auto 25px auto;
+  padding: 25px;
+  max-width: 600px;
+}
+
+.alt-container {
+  margin: 20px auto;
+  padding: 25px;
+  max-width: 600px;
+  border: 1px solid black;
+  border-radius: 15px;
+}
+
+.scoresheet-container {
+  padding: 5px;
+  max-width: 600px;
+}
+
+.scores {
+  border-bottom: 1px solid black;
+}
+
+
+.die-border {
+  border: 2px solid black;
+  border-radius: 15px;
+
+  &.hold {
+    border: 2px solid red;
+  }
+}
+
+.game-container {
+  margin-top: 25px;
+  border: 1px solid black;
+  border-radius: 15px;
+  // background-color: #35654d;
+}
+
+#loadOverlay {
+  display: none;
+}
