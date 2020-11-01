@@ -48,6 +48,15 @@ const onChangePW = function (event) {
     .catch(ui.onChangeFailure)
 }
 
+const onSignOut = function () {
+  // api.logout()
+  api.apiCall('/sign-out', 'DELETE', false, true)
+  // handle SUCCESSFUL response
+    .then(ui.onSignOutSuccess)
+  // handle ERROR response
+    .catch(ui.onSignOutFailure)
+}
+
 const onNewGame = function () {
   const data = {
     game: {
@@ -136,11 +145,39 @@ const onScoreBottom = function (el) {
   }
 }
 
+const onFinalizeGame = function () {
+  const url = '/games/' + store.game.id
+
+  const data = {
+    game: {
+      active: false,
+      top_sub: store.game.top_sub,
+      bonus: store.game.bonus,
+      top_total: store.game.top_total,
+      lower_total: store.game.lower_total,
+      grand_total: store.game.grand_total
+    }
+  }
+
+  api.apiCall(url, 'PATCH', data, true)
+    // handle SUCCESSFUL response
+    .then(ui.onFinalizeGameSuccess)
+    // handled failed response
+    .catch(ui.onFinalizeGameFailure)
+}
+
+const getLeaders = function () {
+  console.log('getLeaders')
+}
+
 module.exports = {
   onRegister: onRegister,
   onSignIn: onSignIn,
   onChangePW: onChangePW,
+  onSignOut: onSignOut,
   onNewGame: onNewGame,
   onScoreTop: onScoreTop,
-  onScoreBottom: onScoreBottom
+  onScoreBottom: onScoreBottom,
+  getLeaders: getLeaders,
+  onFinalizeGame: onFinalizeGame
 }

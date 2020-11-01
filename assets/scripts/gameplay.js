@@ -1,15 +1,8 @@
 'use strict'
 
-const store = require("./store")
+const store = require('./store')
+const events = require('./events')
 
-// let activeGame = false
-// let roundNumber = 1 // tracks turns - a game of yahtzee has 13 turns
-// let rollCount = 0 // tracks rolls per turn - max of 3
-// let ones, twos, threes, fours, fives, sixes
-// let topSub = 0
-// let topBonus = 0
-// let lowerTotal = 0
-// let grandTotal = 0
 let tableDice = [] // only the dice that are being rolled
 let savedDice = [] // only the dice that are being held
 
@@ -17,9 +10,31 @@ const randDie = function () {
   return (Math.floor(Math.random() * 6) + 1)
 }
 
+const clearScoresheet = function () {
+  $('#ones-div').html('<a href="#" id="ones">Apply score to ACES</a>')
+  $('#twos-div').html('<a href="#" id="twos">Apply score to TWOS</a>')
+  $('#threes-div').html('<a href="#" id="threes">Apply score to THREES</a>')
+  $('#fours-div').html('<a href="#" id="fours">Apply score to FOURS</a>')
+  $('#fives-div').html('<a href="#" id="fives">Apply score to FIVES</a>')
+  $('#sixes-div').html('<a href="#" id="sixes">Apply score to SIXES</a>')
+  $('#sub-top').html('')
+  $('#bonus').html('')
+  $('#top-total').html('')
+  $('#three_k-div').html('<a href="#" id="3k">Apply score to 3 of a Kind</a>')
+  $('#four_k-div').html('<a href="#" id="4k">Apply score to 4 of a Kind</a>')
+  $('#full_house-div').html('<a href="#" id="fh">Apply score to Full House</a>')
+  $('#small_straight-div').html('<a href="#" id="ss">Apply score to Sm Straight</a>')
+  $('#large_straight-div').html('<a href="#" id="ls">Apply score to Lg Straight</a>')
+  $('#yahtzee-div').html('<a href="#" id="yahtzee">Apply score to Yahtzee</a>')
+  $('#chance-div').html('<a href="#" id="chance">Apply score to Chance</a>')
+  $('#lower-div').html('')
+  $('#upper-div').html('')
+  $('#grand-div').html('')
+}
+
 const newGame = function (res) {
   // clear the doce on the table
-  // $('#game-table').empty()
+  $('#game-table').empty()
   tableDice.length = 0
 
   // clear the saved dice
@@ -54,22 +69,26 @@ const newGame = function (res) {
   $('#roll-dice').html('Roll!')
 
   // reset the scoresheet
-  $('#ones-div').html('<a href="#" id="ones">Apply score to ACES</a>')
-  $('#twos-div').html('<a href="#" id="twos">Apply score to TWOS</a>')
-  $('#threes-div').html('<a href="#" id="threes">Apply score to THREES</a>')
-  $('#fours-div').html('<a href="#" id="fours">Apply score to FOURS</a>')
-  $('#fives-div').html('<a href="#" id="fives">Apply score to FIVES</a>')
-  $('#sixes-div').html('<a href="#" id="sixes">Apply score to SIXES</a>')
-  $('#sub-top').html('')
-  $('#bonus').html('')
-  $('#top-total').html('')
-  $('#three_k-div').html('<a href="#" id="3k">Apply score to 3 of a Kind</a>')
-  $('#four_k-div').html('<a href="#" id="4k">Apply score to 4 of a Kind</a>')
-  $('#full_house-div').html('<a href="#" id="fh">Apply score to Full House</a>')
-  $('#small_straight-div').html('<a href="#" id="ss">Apply score to Sm Straight</a>')
-  $('#large_straight-div').html('<a href="#" id="ls">Apply score to Lg Straight</a>')
-  $('#yahtzee-div').html('<a href="#" id="yahtzee">Apply score to Yahtzee</a>')
-  $('#chance-div').html('<a href="#" id="chance">Apply score to Chance</a>')
+  clearScoresheet()
+  // $('#ones-div').html('<a href="#" id="ones">Apply score to ACES</a>')
+  // $('#twos-div').html('<a href="#" id="twos">Apply score to TWOS</a>')
+  // $('#threes-div').html('<a href="#" id="threes">Apply score to THREES</a>')
+  // $('#fours-div').html('<a href="#" id="fours">Apply score to FOURS</a>')
+  // $('#fives-div').html('<a href="#" id="fives">Apply score to FIVES</a>')
+  // $('#sixes-div').html('<a href="#" id="sixes">Apply score to SIXES</a>')
+  // $('#sub-top').html('')
+  // $('#bonus').html('')
+  // $('#top-total').html('')
+  // $('#three_k-div').html('<a href="#" id="3k">Apply score to 3 of a Kind</a>')
+  // $('#four_k-div').html('<a href="#" id="4k">Apply score to 4 of a Kind</a>')
+  // $('#full_house-div').html('<a href="#" id="fh">Apply score to Full House</a>')
+  // $('#small_straight-div').html('<a href="#" id="ss">Apply score to Sm Straight</a>')
+  // $('#large_straight-div').html('<a href="#" id="ls">Apply score to Lg Straight</a>')
+  // $('#yahtzee-div').html('<a href="#" id="yahtzee">Apply score to Yahtzee</a>')
+  // $('#chance-div').html('<a href="#" id="chance">Apply score to Chance</a>')
+  // $('#lower-div').html('')
+  // $('#upper-div').html('')
+  // $('#grand-div').html('')
 }
 
 const nextRound = function () {
@@ -85,12 +104,9 @@ const nextRound = function () {
     // increment the round number and reset the roll count
     store.game.roundNumber++
     store.game.rollCount = 0
-    console.log(store.game.roundNumber)
   } else {
     // after 13 turns the game is over!
-    // prompt the user to start a new game
-    store.game.activeGame = false
-    console.log('This game is over!')
+    events.onFinalizeGame()
   }
   console.log(store.game)
 }
@@ -188,5 +204,6 @@ module.exports = {
   nextRound: nextRound,
   tableDice: tableDice,
   savedDice: savedDice,
+  clearScoresheet: clearScoresheet,
   newGame: newGame
 }

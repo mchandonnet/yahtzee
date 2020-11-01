@@ -31,13 +31,17 @@ $(() => {
     ui.views(false, false, false, true, true)
   })
 
+  $('#btn-home').on('click', function () {
+    ui.views(false, false, false, true, true)
+  })
+
+  $('#btn-leaders').on('click', events.getLeaders)
+
   $('#btn-change-password').on('click', function () {
     ui.views(true, false, false, true, false)
   })
 
-  $('#btn-home').on('click', function () {
-    ui.views(false, false, false, true, true)
-  })
+  $('#btn-logout').on('click', events.onSignOut)
 
   // Create event listeners for Game PLay
   // ---------------------------------------------------------------------- //

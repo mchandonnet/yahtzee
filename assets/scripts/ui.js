@@ -21,6 +21,8 @@ const onLoginSuccess = function (res) {
   resetForms(true)
   // store the user infirmation to the store variable
   store.user = res.user
+  console.log('store: ', store.user)
+  console.log('store.game: ', store.game)
   // show / hide forms
   views(false, false, false, true, true)
 }
@@ -33,6 +35,13 @@ const onChangeSuccess = function () {
   setTimeout(function () {
     resetForms(true)
   }, 5000)
+}
+
+const onSignOutSuccess = function () {
+  store.user = {}
+  store.game = {}
+  resetForms(true)
+  views(false, true, false, false, false)
 }
 
 // Promise functions for Failed api calls
@@ -66,6 +75,9 @@ const onChangeFailure = function () {
   }, 5000)
 }
 
+const onSignOutFailure = function () {
+  console.log('Sign-out Failure')
+}
 // General Game Functions
 // ---------------------------------------------------------------------- //
 const onNewGameSuccess = function (res) {
@@ -85,12 +97,11 @@ const onScoreTopFailure = function () {
 }
 
 const onScoreBottomSuccess = function (res) {
-  console.log('onScoreBottomSuccess: ', 'success')
   gameplay.nextRound()
 }
 
 const onScoreBottomFailure = function () {
-  console.log('Failure')
+  console.log('Score Bottom Failure')
 }
 // General UI functions
 // ---------------------------------------------------------------------- //
@@ -152,39 +163,63 @@ const updateTopScoreUI = function (num, score) {
   const label = ['', 'ones', 'twos', 'threes', 'fours', 'fives', 'sixes']
   // update the score in the store variable
   store.game[label[num]] = score
-  // calculate the top score
-  store.game.top_sub = (store.game.ones + store.game.twos + store.game.threes + store.game.fours + store.game.fives + store.game.sixes)
-  // calculate the bonus
-  if (store.game.bonus === null && store.game.top_sub >= 63) {
-    store.game.bonus = 35
-  }
-  // calculate the total
-  store.game.top = store.game.top_sub + store.game.bonus
 
   // update the score UI
   $(`#${label[num]}-div`).html(score)
-  $('#sub-top').html(store.game.top_sub)
-  $('#bonus').html(store.game.bonus)
-  $('#top-total').html(store.game.top)
-  $('#upper-div').html(store.game.top)
-
-  console.log('store.game variable after update: ', store.game)
+  updateTotals()
 }
 
 const updateBottomScoreUI = function (label, score) {
   console.log('label: ', label)
   // update the score in the store variable
   store.game[label] = score
-  // calculate the bottom score
-  store.game.lower_total = (store.game.three_k + store.game.four_k + store.game.full_house + store.game.small_straight + store.game.large_straight + store.game.yahtzee + store.game.chance)
-  // calculate the grand total
-  store.game.grand_total = store.game.lower_total + store.game.top
 
   // update the score UI
   $(`#${label}-div`).html(score)
-  $('#upper-div').html(store.game.top)
+  updateTotals()
+}
+
+const updateTotals = function () {
+  // calculate the top score
+  store.game.top_sub = (store.game.ones + store.game.twos + store.game.threes + store.game.fours + store.game.fives + store.game.sixes)
+  // calculate the bonus
+  if (store.game.bonus === null && store.game.top_sub >= 63) {
+    store.game.bonus = 35
+  }
+  // calculate the top total
+  store.game.top = store.game.top_sub + store.game.bonus
+
+  // calculate the bottom score
+  store.game.lower_total = (store.game.three_k + store.game.four_k + store.game.full_house + store.game.small_straight + store.game.large_straight + store.game.yahtzee + store.game.chance)
+  // calculate the grand total
+  store.game.grand_total = (store.game.lower_total + store.game.top)
+
+  // Update Scsores on the LOWER part of the Scoresheet
+  // update display for - UPPER - Subtotal
+  $('#sub-top').html(store.game.top_sub)
+  // update display for - UPPER - Bonus
+  $('#bonus').html(store.game.bonus)
+  // update display for top Total TOP
+  $('#top-total').html(store.game.top)
+
+  // Update scores on the LOWER part of the Scoresheet
+  // Update display for LOWER - Total
   $('#lower-div').html(store.game.lower_total)
+  // Update display for UPPER TOTAL on the LOWER section
+  $('#upper-div').html(store.game.top)
+  // Update display for LOWER - GRAND TOTAL
   $('#grand-div').html(store.game.grand_total)
+}
+
+const onFinalizeGameSuccess = function () {
+  store.game = {}
+  gameplay.clearScoresheet()
+  // store.game.activeGame = false
+  // console.log('This game is over!')
+}
+
+const onFinalizeGameFailure = function () {
+  console.log('Finalize Game Failure')
 }
 
 module.exports = {
@@ -202,6 +237,10 @@ module.exports = {
   onScoreBottomSuccess: onScoreBottomSuccess,
   onScoreBottomFailure: onScoreBottomFailure,
   updateBottomScoreUI: updateBottomScoreUI,
+  onSignOutSuccess: onSignOutSuccess,
+  onSignOutFailure: onSignOutFailure,
+  onFinalizeGameSuccess: onFinalizeGameSuccess,
+  onFinalizeGameFailure: onFinalizeGameFailure,
   resetForms: resetForms,
   resetHTML: resetHTML,
   views: views
