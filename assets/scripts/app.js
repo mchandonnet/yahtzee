@@ -17,28 +17,28 @@ $(() => {
 
   // Create event listeners for links
   // ---------------------------------------------------------------------- //
-  // views(changepw, login, register, nav, game)
+  // views(changepw, login, register, nav, game, highScores)
   // Register User / Already a user
   $('#anchor-login').on('click', function () {
-    ui.views(false, true, false, false, false)
+    ui.views(false, true, false, false, false, false)
   })
 
   $('#anchor-register-user').on('click', function () {
-    ui.views(false, false, true, false, false)
+    ui.views(false, false, true, false, false, false)
   })
 
   $('#anchor-back-to-game').on('click', function () {
-    ui.views(false, false, false, true, true)
+    ui.views(false, false, false, true, true, false)
   })
 
   $('#btn-home').on('click', function () {
-    ui.views(false, false, false, true, true)
+    ui.views(false, false, false, true, true, false)
   })
 
   $('#btn-leaders').on('click', events.getLeaders)
 
   $('#btn-change-password').on('click', function () {
-    ui.views(true, false, false, true, false)
+    ui.views(true, false, false, true, false, false)
   })
 
   $('#btn-logout').on('click', events.onSignOut)

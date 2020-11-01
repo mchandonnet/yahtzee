@@ -11,7 +11,7 @@ const onRegSuccess = function () {
   $('#registration-result').html('<p class="alert alert-success">Thanks for registering.  You are being redirected to the login page...</p>')
   setTimeout(function () {
     resetForms(true)
-    views(false, true, false, false)
+    views(false, true, false, false, false, false)
   }, 5000)
 }
 
@@ -24,7 +24,7 @@ const onLoginSuccess = function (res) {
   console.log('store: ', store.user)
   console.log('store.game: ', store.game)
   // show / hide forms
-  views(false, false, false, true, true)
+  views(false, false, false, true, true, false)
 }
 
 // Change Password Success
@@ -41,7 +41,7 @@ const onSignOutSuccess = function () {
   store.user = {}
   store.game = {}
   resetForms(true)
-  views(false, true, false, false, false)
+  views(false, true, false, false, false, false)
 }
 
 // Promise functions for Failed api calls
@@ -93,10 +93,11 @@ const onScoreTopSuccess = function (res) {
 }
 
 const onScoreTopFailure = function () {
-  console.log('Failure')
+  console.log('Score Top Failure')
 }
 
 const onScoreBottomSuccess = function (res) {
+  console.log('Running onScoreBottomSuccess')
   gameplay.nextRound()
 }
 
@@ -123,7 +124,7 @@ const resetHTML = function () {
   $('#api-failure').html('')
 }
 
-const views = function (changepw, login, register, nav, game) {
+const views = function (changepw, login, register, nav, game, highScores) {
   if (changepw) {
     $('#change-password-form').show()
   } else {
@@ -153,6 +154,12 @@ const views = function (changepw, login, register, nav, game) {
   } else {
     $('#game-section').hide()
   }
+
+  if (highScores) {
+    $('#high-scores').show()
+  } else {
+    $('#high-scores').hide()
+  }
 }
 
 // Game UI functions
@@ -170,7 +177,7 @@ const updateTopScoreUI = function (num, score) {
 }
 
 const updateBottomScoreUI = function (label, score) {
-  console.log('label: ', label)
+  console.log('Running updateBottomScoreUI')
   // update the score in the store variable
   store.game[label] = score
 
@@ -211,15 +218,56 @@ const updateTotals = function () {
   $('#grand-div').html(store.game.grand_total)
 }
 
-const onFinalizeGameSuccess = function () {
-  store.game = {}
-  gameplay.clearScoresheet()
-  // store.game.activeGame = false
-  // console.log('This game is over!')
+/*  This function is not working! */
+// const onFinalizeGameSuccess = function () {
+//   // store.game = {}
+//   // gameplay.clearScoresheet()
+//   // store.game.activeGame = false
+//   // console.log('This game is over!')
+//   console.log('Finalize Game Success!')
+//   console.log('store.game after finalizing: ', store.game)
+// }
+
+/*  This function is not working! */
+// const onFinalizeGameFailure = function () {
+//   console.log('Finalize Game Failure!')
+// }
+
+const onGetLeadersSuccess = function (res) {
+  let scoresHTML = (`
+    <div class="col-12 header scores border-top border-dark d-flex justify-content-center">
+      <div class="col-12 d-flex justify-content-start">All-time high scores (Top 25)</div>
+    </div>
+  `)
+
+  if (res.games.length === 0) {
+    const scoreHTML = (` 
+    <div class="col-12 scores d-flex justify-content-center">
+      <div class="col-12">The high score list is currently EMPTY -- You should play a game!</div>
+    </div>
+  `)
+
+    scoresHTML += scoreHTML
+  } else {
+    res.games.forEach(function (game) {
+      const scoreHTML = (` 
+      <div class="col-12 scores d-flex justify-content-center">
+        <div class="col-6">${game.owner.firstName} ${game.owner.lastName}</div>
+        <div class="col-6 d-flex justify-content-end" id="ones-div">${game.grand_total}</div>
+      </div>
+      `)
+
+      scoresHTML += scoreHTML
+    })
+  }
+
+  $('#score-container').html(scoresHTML)
+
+  console.log('Success')
 }
 
-const onFinalizeGameFailure = function () {
-  console.log('Finalize Game Failure')
+const onGetLeadersFailure = function () {
+  console.log('Failure')
 }
 
 module.exports = {
@@ -239,8 +287,10 @@ module.exports = {
   updateBottomScoreUI: updateBottomScoreUI,
   onSignOutSuccess: onSignOutSuccess,
   onSignOutFailure: onSignOutFailure,
-  onFinalizeGameSuccess: onFinalizeGameSuccess,
-  onFinalizeGameFailure: onFinalizeGameFailure,
+  onGetLeadersSuccess: onGetLeadersSuccess,
+  onGetLeadersFailure: onGetLeadersFailure,
+  // onFinalizeGameSuccess: onFinalizeGameSuccess,
+  // onFinalizeGameFailure: onFinalizeGameFailure,
   resetForms: resetForms,
   resetHTML: resetHTML,
   views: views

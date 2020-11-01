@@ -8,6 +8,10 @@ body {
   font-size: 15px;
 }
 
+*:focus {
+  outline: none;
+}
+
 // main link color
 a:link,
 a:visited {
@@ -36,6 +40,9 @@ input[type="color"]:focus {
 
 .die-spacer {
   height: 60px;
+  color: #DE2B1B;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 #register-form { 
@@ -48,6 +55,10 @@ input[type="color"]:focus {
 
 #game-section {
   display: none
+}
+
+#high-scores {
+  display: none;
 }
 
 
@@ -123,9 +134,11 @@ input[type="color"]:focus {
 }
 
 .alt-container {
-  margin: 25px auto 25px auto;
+  margin: 20px auto;
   padding: 25px;
   max-width: 600px;
+  border: 1px solid black;
+  border-radius: 15px;
 }
 
 .scoresheet-container {
@@ -148,7 +161,10 @@ input[type="color"]:focus {
 }
 
 .game-container {
+  margin-top: 25px;
   border: 1px solid black;
+  border-radius: 15px;
+  // background-color: #35654d;
 }
 
 #loadOverlay {

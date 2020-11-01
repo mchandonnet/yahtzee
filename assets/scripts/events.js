@@ -75,7 +75,6 @@ const onScoreTop = function (num) {
   if (store.game.rollCount <= 0) {
     return false
   } else {
-
     const label = ['', 'ones', 'twos', 'threes', 'fours', 'fives', 'sixes']
     const score = scoring.count(num)
     const url = '/games/' + store.game.id
@@ -92,7 +91,6 @@ const onScoreTop = function (num) {
       .then(ui.updateTopScoreUI(num, score))
     // handle ERRROR response
       .catch(ui.onScoreTopFailure)
-
   }
 }
 
@@ -126,6 +124,7 @@ const onScoreBottom = function (el) {
       item = 'chance'
       itemScore = scoring.chance()
     } else {
+      console.log('onScoreBottom returns False')
       return false
     }
 
@@ -145,29 +144,42 @@ const onScoreBottom = function (el) {
   }
 }
 
-const onFinalizeGame = function () {
-  const url = '/games/' + store.game.id
+/*  This function is not working! */
+// const onFinalizeGame = function () {
+//   console.log('Running onFinalizeGame()')
+//   // 1. Define the url for the API call
+//   const url = '/games/' + store.game.id
+//   console.log('Define the url for the API call: ', url)
 
-  const data = {
-    game: {
-      active: false,
-      top_sub: store.game.top_sub,
-      bonus: store.game.bonus,
-      top_total: store.game.top_total,
-      lower_total: store.game.lower_total,
-      grand_total: store.game.grand_total
-    }
-  }
+//   // 2. Define the data variable for the API call
+//   const data = {
+//     game: {
+//       active: false,
+//       top_sub: store.game.top_sub,
+//       bonus: store.game.bonus,
+//       top_total: store.game.top_total,
+//       lower_total: store.game.lower_total,
+//       grand_total: store.game.grand_total
+//     }
+//   }
+//   console.log('Define the data variable for the API call: ', data)
 
-  api.apiCall(url, 'PATCH', data, true)
-    // handle SUCCESSFUL response
-    .then(ui.onFinalizeGameSuccess)
-    // handled failed response
-    .catch(ui.onFinalizeGameFailure)
-}
+//   // 3. Make the API call
+//   api.apiCall(url, 'PATCH', data, true)
+//     // handle SUCCESSFUL response
+//     .then(ui.onFinalizeGameSuccess)
+//     // handled failed response
+//     .catch(ui.onFinalizeGameFailure)
+// }
 
 const getLeaders = function () {
-  console.log('getLeaders')
+  api.apiCall('/leaders', 'GET', false, true)
+    // handle SUCCESSFUL response
+    .then(ui.onGetLeadersSuccess)
+    // handle ERRROR response
+    .catch(ui.onGetLeadersFailure)
+
+  ui.views(false, false, false, true, false, true)
 }
 
 module.exports = {
@@ -178,6 +190,6 @@ module.exports = {
   onNewGame: onNewGame,
   onScoreTop: onScoreTop,
   onScoreBottom: onScoreBottom,
-  getLeaders: getLeaders,
-  onFinalizeGame: onFinalizeGame
+  getLeaders: getLeaders
+  // onFinalizeGame: onFinalizeGame
 }
