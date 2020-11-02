@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Yahtzee!</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;700&display=swap" rel="stylesheet">
+      <!-- Bootstrap -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>      
+            
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+
+       <!--- This style block was added here to prevent the flickering of hidden content when the page loads-->
+     <div id="loadOverlay" style="background-color:#ffffff; position:absolute; top:0px; left:0px; width:100%; height:100%; z-index:2000;"></div>
+     
+    </head>
+    <body>
+
+      <!-- Being Navigation section -->
+      <nav id="navigation">
+        <div class="row nav">
+          <div class="col-6 logo d-flex justify-content-center align-items-center"><em>Yahtzee!</em></div>
+          <div class="col-6" id="nav-images">
+            <ul> 
+
+              <li>
+                <a href="#" id="btn-home">
+                  <img src="public/home.svg" width="40px" height="40px" class="svg-images">
+                </a>
+              </li>
+
+              <li>
+                <a href="#" id="btn-leaders">
+                  <img src="public/leaderboard.svg" width="40px" height="40px" class="svg-image-trophy">
+                </a>
+              </li>
+
+              <li>
+                <a href="#" id="btn-change-password">
+                  <img src="public/change-pw.svg" width="40px" height="40px" class="svg-images">
+                </a>
+              </li>
+
+              <li>
+                <a href="#" id="btn-logout">
+                  <img src="public/logout-outline.svg" width="40px" height="40px" class="svg-images">
+                </a>
+              </li>
+
+            </ul>
+          </div>
+          <div class="col-12" id="api-failure"></div>
+        </div>
+      </nav>
+
+      <!-- Begin API ERRORS section -->
+      <section id="api-error-section">
+
+        <div class="row api-error-container">
+          <div class="col-12" id="api-error">
+            <!-- Placeholder for API errors -->
+          </div>
+        </div>
+
+
+      </section>
+      <!-- End API ERRORS section -->
+
+      
+      
+      <!-- BEGIN REGISTER FORM SECTION -->
+      <section id="register-section">      
+        <form name="register-form" id="register-form">          
+          <div class="container">
+
+            <div class="row mb-4">
+              <div class="col-12">Register User</div>
+            </div>
+
+            
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="person-add-sharp"></ion-icon></span>
+              </div>
+              <input type="text" class="form-control" placeholder="first name" name="credentials[firstName]" id="register-firstName" required>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="person-add-sharp"></ion-icon></span>
+              </div>
+              <input type="text" class="form-control" placeholder="last name" name="credentials[lastName]" id="register-lastName" required>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="mail"></ion-icon></span>
+              </div>
+              <input type="email" class="form-control" placeholder="email address" name="credentials[email]" id="register-email" required>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="lock-closed-sharp"></ion-icon></span>
+              </div>
+              <input type="password" class="form-control" placeholder="password" name="credentials[password]" id="register-password" required>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="lock-closed-sharp"></ion-icon></span>
+              </div>
+              <input type="password" class="form-control" placeholder="confirm password" name="credentials[password_confirmation]" id="register-confirmation" required>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div id="registration-result"></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="login col-12"><input class="btn btn-secondary btn-block" type="submit" name="register-submit" value="Register a new user"></div>
+            </div>
+
+            <div class="row">
+              <div class="login col-12"></div>
+            </div>
+
+            <div class="row">
+              <div class="login col-12"></div>
+            </div>
+
+
+            <div class="row">
+              <div class="accent-div-bottom login col-12 d-flex justify-content-end"><a href="#" id="anchor-login">Already a user?  Click here to login</a></div>
+            </div>
+
+
+          </div>
+        </form> 
+      </section>
+      <!-- END REGISTER FORM SECTION --> 
+       
+      
+
+      <!-- BEGIN LOGIN FORM SECTION -->
+      <section id="login-secion">
+        <form name="login-form" id="login-form">
+        
+            <div class="container">
+
+              <div class="row mb-4">
+                <div class="col-12">User login</div>
+              </div>
+              
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="mail"></ion-icon></span>
+                </div>
+                <input type="email" class="form-control" placeholder="email address" name="credentials[email]" id="login-email" required>
+              </div>
+
+              
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+                </div>
+                <input type="password" class="form-control" placeholder="password" name="credentials[password]" id="login-password" required>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <div id="login-result"></div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <input class="btn btn-secondary btn-block" type="submit" name="login-submit" value="Sign In"></input>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12">
+                  <a href="#" id="anchor-forgot-pw"></a></span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12"></div>
+              </div>
+
+              <div class="row">
+                <div class="login col-12 d-flex justify-content-end"><a href="#" id="anchor-register-user">Click to register new user</a></div>
+              </div>
+
+          </div>
+
+        </form>
+      </section>
+      <!-- END LOGIN FORM SECTION -->
+
+      
+      <!-- START CHANGE PASSWORD SECTION-->
+      <section id="change-password-section">
+        <form name="change-password-form" id="change-password-form">        
+          <div class="container">
+
+            <div class="row mb-4">
+              <div class="col-12">Change password</div>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+              </div>
+              <input type="password" class="form-control" placeholder="current password" name="passwords[old]" id="change-password" required>
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><ion-icon name="lock-closed"></ion-icon></span>
+              </div>
+              <input type="password" class="form-control" placeholder="new password" name="passwords[new]" id="change-confirmation" required>
+            </div>
+
+            <div class="row">
+              <div class="col-12" id="change-password-result">
+                <p id="change-password-result"></p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div id="login-result"></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12"><input class="btn btn-secondary btn-block" type="submit" name="change-password" value="change password"></div>
+            </div>
+
+            <div class="row">
+              <div class="col-12"></div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 d-flex justify-content-end"><a href="#" id="anchor-back-to-game">Click to return to the game</a></div>
+            </div>
+
+          </div>
+        </form>
+      </section>
+      <!-- END CHANGE PASSWORD SECTION -->
+
+
+      <!-- START GAME SECTION-->
+      <section id="game-section-dice">
+        <div id="game-section">
+          <div class="alt-container game-container">
+
+            <div class="row mb-4">
+              
+              <div class="col-12 d-flex justify-content-center die-spacer" id="game-table">
+                
+                <a href="#">
+                  <img class="mx-4 die-border" src="./assets/images/dice-1.png" width="60px" height="60px" alt="Dice" id="d1">
+                </a>
+
+                <a href="#">
+                  <img class="mx-4 die-border" src="./assets/images/dice-2.png" width="60px" height="60px" alt="Dice" id="d1">
+                </a>
+
+                <a href="#">
+                  <img class="mx-4 die-border" src="./assets/images/dice-3.png" width="60px" height="60px" alt="Dice" id="d1">
+                </a>
+
+                <a href="#">
+                  <img class="mx-4 die-border" src="./assets/images/dice-4.png" width="60px" height="60px" alt="Dice" id="d1">
+                </a>
+
+                <a href="#">
+                  <img class="mx-4 die-border" src="./assets/images/dice-5.png" width="60px" height="60px" alt="Dice" id="d1">
+                </a>
+               
+
+              </div>
+
+              <div class="col-12 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-center mt-3 mb-3" id="roll-button-div">
+                    <button class="btn btn-colors btn-block" id="roll-dice" name="roll-dice" disabled>Start a new game by clicking the link in the lower right corner...</button>
+                </div>
+              </div>
+
+              <div class="col-12 d-flex justify-content-center die-spacer" id="saved-game-table">
+                <!-- Placeholder for saved Dice -->
+              </div>
+
+              </div>
+              <div class="col-12 d-flex justify-content-end align-content-end">
+                <a href="#" id="start-new-game">start new game...</a>
+              </div>
+            </div>
+
+
+            <div class="alt-container">
+              
+              <div class="col-12 header scores border-top border-dark d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-start">Upper section</div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Aces - Count and Add Only Aces</div>
+                <div class="col-6 d-flex justify-content-end" id="ones-div">
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Twos - Count and Add Only Twos</div>
+                <div class="col-6 d-flex justify-content-end" id="twos-div">
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Threes - Count and Add Only Threes</div>
+                <div class="col-6 d-flex justify-content-end" id="threes-div">
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Fours - Count and Add Only Fours</div>
+                <div class="col-6 d-flex justify-content-end" id="fours-div">
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Fives - Count and Add Only Fives</div>
+                <div class="col-6 d-flex justify-content-end" id="fives-div">
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Sixes - Count and Add Only Sixes</div>
+                <div class="col-6 d-flex justify-content-end" id="sixes-div">
+                </div>
+              </div>
+
+              
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-11 d-flex justify-content-end">SUBTOTAL:</div>
+                <div class="col-1 d-flex justify-content-end" id="sub-top"></div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-11 d-flex justify-content-end">BONUS - If subtotal is 63 or over:</div>
+                <div class="col-1 d-flex justify-content-end" id="bonus"></div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-11 d-flex justify-content-end">TOTAL - Upper Section Total:</div>
+                <div class="col-1 d-flex justify-content-end" id="top-total"></div>
+              </div>
+
+
+              <div class="col-12 scores header d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-start">Lower section</div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">3 of a Kind - Total of all Dice</div>
+                <div class="col-6 d-flex justify-content-end" id="three_k-div">
+                </div>
+              </div>
+
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">4 of a Kind - Total of all Dice</div>
+                <div class="col-6 d-flex justify-content-end" id="four_k-div">
+                  <!-- <a href="#" id="4k">Apply score to 4 of a Kind</a> -->
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Full House - Score 25</div>
+                <div class="col-6 d-flex justify-content-end" id="full_house-div">
+                  <!-- <a href="#" id="fh">Apply score to Full House</a> -->
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Sm Straight - Score 30</div>
+                <div class="col-6 d-flex justify-content-end" id="small_straight-div">
+                  <!-- <a href="#" id="ss">Apply score to Sm Straight</a> -->
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Lg Straight - Score 40</div>
+                <div class="col-6 d-flex justify-content-end" id="large_straight-div">
+                  <!-- <a href="#" id="ls">Apply score to Lg Straight</a> -->
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Yahtzee - Score 50</div>
+                <div class="col-6 d-flex justify-content-end" id="yahtzee-div">
+                  <!-- <a href="#" id="yahtzee">Apply score to Yahtzee</a> -->
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Chance - Total of all Dice</div>
+                <div class="col-6 d-flex justify-content-end" id="chance-div">
+                  <!-- <a href="#" id="chance">Apply score to Chance</a> -->
+                </div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-11 d-flex justify-content-end">LOWER TOTAL:</div>
+                <div class="col-1 d-flex justify-content-end" id="lower-div"></div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-11 d-flex justify-content-end">UPPER TOTAL:</div>
+                <div class="col-1 d-flex justify-content-end" id="upper-div"></div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-11 d-flex justify-content-end">GRAND TOTAL:</div>
+                <div class="col-1 d-flex justify-content-end" id="grand-div"></div>
+              </div>
+
+
+            </div>
+          
+          </div>
+        </div>
+      </section>
+      <!-- END GAME SECTION -->
+
+
+
+      <!-- START HIGH SCORES SECTION-->
+      <section id="high-scores-section">
+        <div id="high-scores">
+            <div class="alt-container" id="score-container">
+              
+              <!-- <div class="col-12 header scores border-top border-dark d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-start">All-time high scores</div>
+              </div>
+
+              <div class="col-12 scores d-flex justify-content-center">
+                <div class="col-6">Mike Chandonnet</div>
+                <div class="col-6 d-flex justify-content-end" id="ones-div">245</div>
+              </div> -->
+
+            </div>
+          
+          </div>
+      </section>
+      <!-- END GAME SECTION -->
+        
+
+    <!-- <script>
+      $(document).ready(function(){
+      $('[data-toggle="popover"]').popover();
+      $('.popover-dismiss').popover({
+        trigger: 'focus'
+      })  
+      });
+    </script> -->
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+    </body>
+</html>
