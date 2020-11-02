@@ -34,11 +34,7 @@ const count = function (num) {
   // combine all the dice into a since array and sort it...
   // const allDice = gameplay.tableDice.concat(gameplay.savedDice)
   // allDice.sort()
-  // console.log('All Dice: ', allDice())
-  // console.log('Table Dice: ', gameplay.tableDice)
-  // console.log('Saved Dice: ', gameplay.savedDice)
   const count = allDice().filter(el => el === num)
-  console.log(num * count.length)
   return (num * count.length)
 }
 
@@ -57,7 +53,6 @@ const threeK = function () {
       score = 0
     }
   }
-  console.log(score)
   return score
 }
 
@@ -76,7 +71,6 @@ const fourK = function () {
       score = 0
     }
   }
-  console.log(score)
   return score
 }
 
@@ -88,15 +82,12 @@ const fh = function () {
   if (unique.length === 2) {
     const a = getQty(all, unique[0])
     const b = getQty(all, unique[1])
-    // console.log('a: ', a)
-    // console.log('b: ', b)
     if (((a === 3) && (b === 2)) || ((a === 2) && (b === 3))) {
       score = 25
     }
   } else {
     score = 0
   }
-  console.log(score)
   return score
 }
 
@@ -111,7 +102,6 @@ const ss = function () {
   } else {
     score = 0
   }
-  console.log(score)
   return score
 }
 
@@ -126,7 +116,6 @@ const ls = function () {
   } else {
     score = 0
   }
-  console.log(score)
   return score
 }
 
@@ -138,7 +127,6 @@ const yahtzee = function () {
   } else {
     score = 0
   }
-  console.log(score)
   return score
 }
 
@@ -150,7 +138,6 @@ const chance = function () {
   } else {
     score = 0
   }
-  console.log(score)
   return score
 }
 

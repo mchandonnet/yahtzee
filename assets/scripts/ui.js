@@ -11,7 +11,7 @@ const onRegSuccess = function () {
   $('#registration-result').html('<p class="alert alert-success">Thanks for registering.  You are being redirected to the login page...</p>')
   setTimeout(function () {
     resetForms(true)
-    views(false, true, false, false, false, false)
+    views(false, true, false, false, false, false, false)
   }, 5000)
 }
 
@@ -21,10 +21,8 @@ const onLoginSuccess = function (res) {
   resetForms(true)
   // store the user infirmation to the store variable
   store.user = res.user
-  console.log('store: ', store.user)
-  console.log('store.game: ', store.game)
   // show / hide forms
-  views(false, false, false, true, true, false)
+  views(false, false, false, true, true, false, false)
 }
 
 // Change Password Success
@@ -40,8 +38,53 @@ const onChangeSuccess = function () {
 const onSignOutSuccess = function () {
   store.user = {}
   store.game = {}
+  
+  $('#ones-div').html('')
+  $('#twos-div').html('')
+  $('#threes-div').html('')
+  $('#fours-div').html('')
+  $('#fives-div').html('')
+  $('#sixes-div').html('')
+  $('#sub-top').html('')
+  $('#bonus').html('')
+  $('#top-total').html('')
+  $('#three_k-div').html('')
+  $('#four_k-div').html('')
+  $('#full_house-div').html('')
+  $('#small_straight-div').html('')
+  $('#large_straight-div').html('')
+  $('#yahtzee-div').html('')
+  $('#chance-div').html('')
+  $('#lower-div').html('')
+  $('#upper-div').html('')
+  $('#grand-div').html('')
+
+  $('#game-table').html(`
+  <a href="#">
+    <img class="mx-4 die-border" src="./assets/images/dice-1.png" width="60px" height="60px" alt="Dice" id="d1">
+  </a>
+
+  <a href="#">
+    <img class="mx-4 die-border" src="./assets/images/dice-2.png" width="60px" height="60px" alt="Dice" id="d1">
+  </a>
+
+  <a href="#">
+    <img class="mx-4 die-border" src="./assets/images/dice-3.png" width="60px" height="60px" alt="Dice" id="d1">
+  </a>
+
+  <a href="#">
+    <img class="mx-4 die-border" src="./assets/images/dice-4.png" width="60px" height="60px" alt="Dice" id="d1">
+  </a>
+
+  <a href="#">
+    <img class="mx-4 die-border" src="./assets/images/dice-5.png" width="60px" height="60px" alt="Dice" id="d1">
+  </a>
+  `)
+  $('#roll-dice').prop('disabled', true)
+  $('#roll-dice').html('Start a new game by clicking the link in the lower right corner...')
+  $('#saved-game-table').html('')
   resetForms(true)
-  views(false, true, false, false, false, false)
+  views(false, true, false, false, false, false, false)
 }
 
 // Promise functions for Failed api calls
@@ -76,7 +119,7 @@ const onChangeFailure = function () {
 }
 
 const onSignOutFailure = function () {
-  console.log('Sign-out Failure')
+  onAPIFailure()
 }
 // General Game Functions
 // ---------------------------------------------------------------------- //
@@ -85,7 +128,7 @@ const onNewGameSuccess = function (res) {
 }
 
 const onNewGamefailure = function () {
-  console.log('Failure')
+  onAPIFailure()
 }
 
 const onScoreTopSuccess = function (res) {
@@ -93,19 +136,29 @@ const onScoreTopSuccess = function (res) {
 }
 
 const onScoreTopFailure = function () {
-  console.log('Score Top Failure')
+  onAPIFailure()
 }
 
 const onScoreBottomSuccess = function (res) {
-  console.log('Running onScoreBottomSuccess')
   gameplay.nextRound()
 }
 
 const onScoreBottomFailure = function () {
-  console.log('Score Bottom Failure')
+  onAPIFailure()
 }
+
 // General UI functions
 // ---------------------------------------------------------------------- //
+// API Failures
+const onAPIFailure = function () {
+  $('#api-error').html('<p class="alert alert-danger">Something went wrong - please wait a few minutes and try again...</p>')
+  $('#api-error').show()
+  setTimeout(function () {
+    resetForms(true)
+    $('#api-error').hide()
+  }, 5000)
+}
+
 // Reset forms
 const resetForms = function (html) {
   $('#change-password-form').trigger('reset')
@@ -124,7 +177,7 @@ const resetHTML = function () {
   $('#api-failure').html('')
 }
 
-const views = function (changepw, login, register, nav, game, highScores) {
+const views = function (changepw, login, register, nav, game, highScores, APIFailure) {
   if (changepw) {
     $('#change-password-form').show()
   } else {
@@ -160,6 +213,12 @@ const views = function (changepw, login, register, nav, game, highScores) {
   } else {
     $('#high-scores').hide()
   }
+
+  if (APIFailure) {
+    $('#api-error-container').show()
+  } else {
+    $('#api-error-container').hide()
+  }
 }
 
 // Game UI functions
@@ -177,7 +236,6 @@ const updateTopScoreUI = function (num, score) {
 }
 
 const updateBottomScoreUI = function (label, score) {
-  console.log('Running updateBottomScoreUI')
   // update the score in the store variable
   store.game[label] = score
 
@@ -262,12 +320,10 @@ const onGetLeadersSuccess = function (res) {
   }
 
   $('#score-container').html(scoresHTML)
-
-  console.log('Success')
 }
 
 const onGetLeadersFailure = function () {
-  console.log('Failure')
+  onAPIFailure()
 }
 
 module.exports = {
@@ -289,6 +345,7 @@ module.exports = {
   onSignOutFailure: onSignOutFailure,
   onGetLeadersSuccess: onGetLeadersSuccess,
   onGetLeadersFailure: onGetLeadersFailure,
+  onAPIFailure: onAPIFailure,
   // onFinalizeGameSuccess: onFinalizeGameSuccess,
   // onFinalizeGameFailure: onFinalizeGameFailure,
   resetForms: resetForms,

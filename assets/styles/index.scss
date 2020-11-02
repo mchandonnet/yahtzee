@@ -66,6 +66,10 @@ input[type="color"]:focus {
   display: none;
 }
 
+#api-error-container {
+  display: none;
+}
+
 .nav {
   
   background-color: #000000;
@@ -130,6 +134,12 @@ input[type="color"]:focus {
 .container {
   margin: 100px auto 25px auto;
   padding: 25px;
+  max-width: 600px;
+}
+
+.api-error-container {
+  margin: 10px auto;
+  padding: 5px;
   max-width: 600px;
 }
 
