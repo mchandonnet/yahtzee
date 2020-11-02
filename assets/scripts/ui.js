@@ -249,10 +249,10 @@ const onGetLeadersSuccess = function (res) {
 
     scoresHTML += scoreHTML
   } else {
-    res.games.forEach(function (game) {
+    res.games.forEach(function (game, index) {
       const scoreHTML = (` 
       <div class="col-12 scores d-flex justify-content-center">
-        <div class="col-6">${game.owner.firstName} ${game.owner.lastName}</div>
+        <div class="col-6">${index + 1}. ${game.owner.firstName} ${game.owner.lastName}</div>
         <div class="col-6 d-flex justify-content-end" id="ones-div">${game.grand_total}</div>
       </div>
       `)
