@@ -76,9 +76,7 @@ const newGame = function (res) {
 }
 
 const nextRound = function () {
-  console.log('Running gameplay.nextRound()')
   if (store.game.roundNumber < 13) {
-    console.log('Running if Statement because store.game.roundNumber < 13: ', store.game.roundNumber)
     // clear the doce on the table
     $('#game-table').empty()
     tableDice.length = 0
@@ -92,12 +90,9 @@ const nextRound = function () {
     store.game.rollCount = 0
   } else {
     // after 13 turns the game is over!
-    console.log('Running else Statement because store.game.roundNumber = 13: ', store.game.roundNumber)
-    console.log('Calling events.onFinalizeGame()')
     // Finalize the Game
     // 1. Define the url for the API call
     const url = '/games/' + store.game.id
-    console.log('Define the url for the API call: ', url)
 
     // 2. Define the data variable for the API call
     const data = {
@@ -110,8 +105,6 @@ const nextRound = function () {
         grand_total: store.game.grand_total
       }
     }
-    console.log('Define the data variable for the API call: ', data)
-    console.log('store.game - before finalizing: ', store.game)
 
     // 3. Make the API call
     api.apiCall(url, 'PATCH', data, true)
@@ -122,8 +115,6 @@ const nextRound = function () {
         $('#roll-dice').prop('disabled', true)
         $('#saved-game-table').html('')
         store.game = {}
-        console.log('Finalize Game Success!')
-        console.log('store.game after finalizing: ', store.game)
       })
       // handled failed response
       .catch(ui.onFinalizeGameFailure)
@@ -164,16 +155,11 @@ const addToHold = function (event) {
     for (let i = 0; i < tableDice.length; i++) {
       showDie(i, tableDice[i], 'roll')
     }
-
-    // console.log('roll: ', tableDice)
-    // console.log('save: ', savedDice)
-    // console.log('all: ', allDice)
   }
 }
 
 const addToTable = function (event) {
   if (store.game.rollCount > 0 && store.game.rollCount <= 3) {
-    // console.log(event.target.dataset.valueIndex)
     // save the die that was clicked on and copy that value to the holdDice array
     tableDice.push(savedDice[event.target.dataset.valueIndex])
     // clear the dice displayed on the table
@@ -190,9 +176,6 @@ const addToTable = function (event) {
     for (let i = 0; i < savedDice.length; i++) {
       showDie(i, savedDice[i], 'save')
     }
-
-    // console.log('roll: ', tableDice)
-    // console.log('hold: ', savedDice)
   }
 }
 

@@ -17,28 +17,36 @@ $(() => {
 
   // Create event listeners for links
   // ---------------------------------------------------------------------- //
-  // views(changepw, login, register, nav, game, highScores)
+  // views(changepw, login, register, nav, game, highScores, APIError)
   // Register User / Already a user
   $('#anchor-login').on('click', function () {
-    ui.views(false, true, false, false, false, false)
+    ui.resetForms(true)
+    ui.views(false, true, false, false, false, false, false)
   })
 
   $('#anchor-register-user').on('click', function () {
-    ui.views(false, false, true, false, false, false)
+    ui.resetForms(true)
+    ui.views(false, false, true, false, false, false, false)
   })
 
   $('#anchor-back-to-game').on('click', function () {
-    ui.views(false, false, false, true, true, false)
+    ui.resetForms(true)
+    ui.views(false, false, false, true, true, false, false)
   })
 
   $('#btn-home').on('click', function () {
-    ui.views(false, false, false, true, true, false)
+    ui.resetForms(true)
+    ui.views(false, false, false, true, true, false, false)
   })
 
-  $('#btn-leaders').on('click', events.getLeaders)
+  $('#btn-leaders').on('click', function () {
+    ui.resetForms(true)
+    events.getLeaders()
+  })
 
   $('#btn-change-password').on('click', function () {
-    ui.views(true, false, false, true, false, false)
+    ui.resetForms(true)
+    ui.views(true, false, false, true, false, false, false)
   })
 
   $('#btn-logout').on('click', events.onSignOut)

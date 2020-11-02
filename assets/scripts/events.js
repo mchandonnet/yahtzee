@@ -124,7 +124,6 @@ const onScoreBottom = function (el) {
       item = 'chance'
       itemScore = scoring.chance()
     } else {
-      console.log('onScoreBottom returns False')
       return false
     }
 
